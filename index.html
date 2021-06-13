@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style type="text/css">
+        iframe {
+            width:100%;
+            height: 100%;
+        }
+        a{
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="test.html#2" target="helpWindow"> test.html</a> <a href="test.html#1" target="helpWindow"> test.html</a>
+    <br><a onClick="cle()">cle</a>
+    <br><a onClick="hide()">hide</a>
+    <div name="...">
+    <iframe name="helpWindow" id="iframe"></iframe>
+    </div>
+    <script >
+    
+        const IFRAME = document.getElementById("iframe")
+        function cle(){
+            console.log("cle")
+            console.log(IFRAME.contentWindow.document)
+            IFRAME.src = "about:blank";
+        }
+        function hide() {
+            cle();
+            IFRAME.style.display = "none";
+        }
+        IFRAME.onload = ()=>{
+            const URL = IFRAME.contentWindow.location.href;
+            console.log(`onload = ${URL}`)
+            if (URL!="about:blank"){
+                IFRAME.style.display = "block";
+            }
+            
+        }
+        
+        IFRAME.contentWindow.document.onload = ()=>{
+        console.log("load")
+        IFRAME.style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
